@@ -1,0 +1,602 @@
+Instrukcje Warunkowe
+
+Życie składa się z wyborów, jak mawiają wielcy myśliciele tego świata. Nie zawsze możemy znaleźć się w dwóch miejscach na raz albo robić dwie rzeczy na raz. Wybory są również nieodzowną częścią świata programowania. W programach bardzo często używa się tychże wyborów by zadecydować co program powinien zrobić z danymi, w jaki sposób je dalej przetworzyć.  Niektórzy ludzie rozważają plan działania wcześniej, inni spontanicznie – program musi mieć z góry jasno sprecyzowane instrukcje działania.
+Wyobraźcie sobie, że posyła was babcia do sklepu po kupno pieczywa z określoną ilością pieniędzy. W sklepie znajduje się jak zawsze chleb ale akurat zauważasz świeżo wypieczone  bułki, które są na dodatek w promocji. Stoisz przed wyborem: chleb czy świeże bułki? Nasza instrukcja była prosta – kup pieczywo, ale sami widzicie jak to jest. Wracając z chlebem zamiast ciepłych bułek babcia będzie zawiedziona. Przekładając to na świat programistów klienci takiej aplikacji do kupowania pieczywa składali by już zażalenia i reklamacje. Pisząc program do kupowania bułek dla babci dobrze by było gdyby uwzględniał tego typu warunki i  kierował się odpowiednimi instrukcjami. Z pomocą przychodzą nam tytułowe instrukcje warunkowe.
+Instrukcje warunkowe pozwalają określić warunek, gdzie po jego spełnieniu zostanie wykonany pewny fragment kodu. Jedną z rodzajów takich instrukcji jest instrukcja if.
+
+Instrukcja warunkowa If
+if to najprostsza instrukcja warunkowa w Javie i chyba w każdym innym języku programowania. Z angielskiego if=Jeżeli i działa dokładnie tak samo.
+Polecenie: „kup chleb jeżeli zostanie pieniędzy na bułkę to kup ją”. Możemy zinterpretować tylko na jeden sposób, który chyba nie trzeba tłumaczyć.
+
+Konstrukcja if:
+if(warunek){
+    // instrukcja po spełnieniu warunku
+}
+
+Prostym przykładem do zobrazowania jest zakup bułek:
+int moneyLeftAfterBread = 10;
+if (moneyLeftAfterBread>=6){
+    // stać nas jeszcze na bułki
+}
+
+Na przykładzie powyżej widzimy, że pozostało nam pieniędzy po zakupie chleba 10, dokonujemy sprawdzania warunku czyli naszego ‘ifa’ w nawiasach. Warunek brzmi : „czy ilość pozostałych pieniędzy jest większa lub równa 6?”. Jeżeli warunek jest spełniony i zwraca prawdę to wykonujemy instrukcję zawartą w nawiasach klamrowych czyli „ciele ifa”, która w naszym przykładzie brzmi: kup jeszcze bułki.
+
+Else
+Wiemy jak postawić warunek ale co jeśli mamy jakąś alternatywę, takie „jeżeli nie”? W Javie istnieje else. Elsa nie można użyć samodzielnie, występuje on tylko i wyłącznie z if i wykona się tylko gdy warunek nie zostanie spełniony. Dobrym przykładem jest wejście do klubu:
+int age = 16;
+if (age>=18){
+    // wchodzimy do klubu
+} else {
+    // niestety jesteśmy za młodzi i nie wejdziemy
+}
+
+Na powyższym przykładzie sprawdzamy wiek naszego delikwenta, który wynosi 16 więc warunek w nawiasach nie zostaje spełniony dlatego wykona się instrukcja, która zawarta jest w ciele else.
+
+Else If
+Co jeśli mamy kilka warunków do sprawdzenia? Z pomocą przychodzi nam konstrukcja else if. Jest to taki dodatkowy if, zresztą spójrzcie sami na przykład z drogerii:
+if (shopping>200) {
+    // dostajemy rabat 20%
+} else if (shopping>100){
+    // dostajemy rabat 10%
+} else {
+    // dostajemy rabat 5%
+}
+
+Widzimy, że robiąc zakupy w drogerii za 500 to otrzymamy rabat 50% i opuścimy instrukcje warunkową if, następnie program będzie rozpatrywał dalsze części programu. Kolejno jeżeli nie wydaliśmy 500 w drogerii to program pominie przyznawanie rabatu 20% i sprawdzi kolejny warunek czyli nasz else if z warunkiem: „czy zakupy są większe niż 100?”. Przyzna 10% rabat jeżeli wydaliśmy 100. Jeżeli pierwszy warunek oraz drugi nie zostaną spełnione, to wykona się instrukcja przydzielania rabatu 5%, niezależnie czy zrobiliśmy jakiekolwiek zakupy bo else wykona się zawsze gdy żadne wcześniejsze warunki nie zostały spełnione. Warto pamiętać, że jak zostanie spełniony chodź jeden warunek to żaden inny już nie będzie nawet sprawdzany. Sprawdzanie warunków następuje zawsze od góry do dołu więc nie zróbcie błędu jak poniżej:
+if (shopping>100) {
+    // dostajemy rabat 10%
+} else if (shopping>500){
+    // dostajemy dodatkowy rabat 20%
+} else {
+    // dostajemy rabat 5%
+}
+
+Na błędnym przykładzie powyżej nawet jeżeli dokonamy zakupów za grubo ponad 500 to sprawdzanie warunków rozpocznie się od pierwszego ifa, który sprawdzi czy zakupy były chodź przynajmniej za 100. Jak były przynajmniej za 100 to dostaniemy tylko rabat 10% i program przejdzie opuści instrukcje warunkowe if i przejdzie w dalsze części kodu bez sprawdzania już innych warunków. Nie chcemy przecież sprawiać trudności sprzedawcom w sklepach którzy bezradni w walce z kasą fiskalną będą rozkładać ręce i tłumaczyć się klientom słowami: „niestety program mnie nie puszcza i nic nie mogę zrobić” – dlatego zapamiętajmy tą lekcję na przyszłość
+
+True False Boolean
+Jak zauważyliście sprawdzany warunek w nawiasach zwraca albo prawdę albo fałsz. Należy pamiętać, że typ prosty boolean sam w sobie może być false albo true, więc nie należy go przyrównywać jak w przykładzie poniżej:
+boolean hasCat;
+if (hasCat){
+    //mamy kota więc jesteśmy szczęśliwi
+} else {
+    //nie posiadamy kota i nie jesteśmy podrapani
+}
+Nie należy stosować: "if (hasCat==true)"! Na szczęście większość IDE poinformuje nas o tym na etapie pisania.
+
+Skrócony if
+Mam nadzieję, że nie zapomnieliście o leniwych programistach;) Oczywiście istnieje skrócona wersja instrukcji if a wygląda tak:
+boolean result;
+result = 1>2?true:false;
+System.out.println(result); // false
+
+Taki zapis normalnie wyglądałby tak:
+boolean result;
+if (1>2){
+    result = true;
+} else {
+    result = false;
+}
+System.out.println(result); // false
+
+Takie rozwiązanie stosuje się zwykle gdy ciało if ogranicza się do jednej linijki. Znak zapytania '?' Java interpretuje jak konstrukcje if, pierwszy człon wykonuje się gdy warunek jest prawdziwy a drugi człon oddzielony znakiem ':' dwukropka wykonuje się gdy warunek zwraca nieprawdę.
+
+*Ciekawostka: wiedzieliście, że jak ciało ifa ma tylko jedną linijkę to nie potrzebne jest umieszczanie go w klamerkach wąsatych '{}' ? Taki zapis jest poprawny ale mniej czytelny i nie zaleca się go stosować:
+boolean result;
+if (4>2) result = true;
+ else
+    result = false;
+System.out.println(result); // true
+
+
+Else if else if else if else if…
+W Javie można używać nieograniczonej ilości instrukcji warunkowych w jednej instrukcji warunkowej if. Nieraz zdarzają się bardzo skomplikowane programy gdzie jest całe drzewko logiczne w programach. Zaprezentujemy przykład takiego drzewka kupna samochodu:
+
+if (carPrice>1000) {
+    // cena powyżej 1000 wiec rozważamy dalszy zakup
+    if (color==pink){
+        //kolor jest różowy więc nie kupuj tego samochodu
+    } else {
+        // kolor jest inny niż różowy więc rozważamy dalszy zakup
+        if (carModel==bmw){
+            // samochód to bmw więc nie kupuj tego samochodu
+        } else if (carModel==audi){
+            //samochód to audi więc rozważamy dalszy zakup
+            if (hasAdditionalWheel){
+                //nasze audi ma dodatkowe koło zapasowe więc kup ten samochod
+            } else {
+                //nasze audi nie posiada dodatkowego koła zapasowgo więc nie kupuj tego samochodu
+            }
+        } else {
+            // kolor jest inny niż różowy, nie jest to audi ani bmw więc kup ten samochod
+        }
+    }
+} else {
+    // cena poniżej 1000 ale wciąż rozważamy zakup po zaniżonej cenie
+    if (canMoveStraight){
+        //jeżeli jedzie prosto to kup samochod
+    }
+    //jak jedzie inaczej niż prosto i kosztuje poniżej 1000 to nie kupuj tego samochodu
+}
+
+Nasz program zakupu samochodu sprawdza początkowy warunek, czyli pierwszego if, który brzmi: „czy cena samochodu jest powyżej 1000?”. Jeżeli tak to program wykonuje ciało tego ifa:
+// cena powyżej 1000 wiec rozważamy dalszy zakup
+if (color==pink){
+    //kolor jest różowy więc nie kupuj tego samochodu
+} else {
+    // kolor jest inny niż różowy więc rozważamy dalszy zakup
+    if (carModel==bmw){
+        // samochód to bmw więc nie kupuj tego samochodu
+    } else if (carModel==audi){
+        //samochód to audi więc rozważamy dalszy zakup
+        if (hasAdditionalWheel){
+            //nasze audi ma dodatkowe koło zapasowe więc kup ten samochod
+        } else {
+            //nasze audi nie posiada dodatkowego koła zapasowgo więc nie kupuj tego samochodu
+        }
+    } else {
+        // kolor jest inny niż różowy, nie jest to audi ani bmw więc kup ten samochod
+    }
+}
+
+Dochodzi do sprawdzenia kolejnego warunku: „czy kolor jest różowy?”. Jak warunek zostanie spełniony to nie kupujemy tego samochodu, ale w innym wypadku wykonujemy ciało elsa:
+// kolor jest inny niż różowy więc rozważamy dalszy zakup
+if (carModel==bmw){
+    // samochód to bmw więc nie kupuj tego samochodu
+} else if (carModel==audi){
+    //samochód to audi więc rozważamy dalszy zakup
+    if (hasAdditionalWheel){
+        //nasze audi ma dodatkowe koło zapasowe więc kup ten samochod
+    } else {
+        //nasze audi nie posiada dodatkowego koła zapasowgo więc nie kupuj tego samochodu
+    }
+} else {
+    // kolor jest inny niż różowy, nie jest to audi ani bmw więc kup ten samochod
+}
+
+Teraz kolejna gałąź naszego drzewka logicznego, sprawdzamy model samochodu czy jest to bmw czy może audi. Zakładając, że jest to audi wykonujemy ciało else if:
+//samochód to audi więc rozważamy dalszy zakup
+if (hasAdditionalWheel){
+    //nasze audi ma dodatkowe koło zapasowe więc kup ten samochod
+} else {
+    //nasze audi nie posiada dodatkowego koła zapasowgo więc nie kupuj tego samochodu
+}
+
+Sprawdzamy czy nasze audi posiada dodatkowe koło i wykonujemy instrukcje, która głosi kup albo nie kup samochód.
+
+Takie drzewka wyglądają bardzo skomplikowanie ale nie przejmuj się, są rzadko używane. Są lepsze i szybsze metody do tworzenia skomplikowanych warunków i ich analizę.
+
+W przypadku wielu instrukcji typu else if zalecane jest używanie szybszego i bardziej eleganckiego switch.
+
+
+Zadanie 1
+Napisz program, który sprawdzi czy wprowadzona liczba jest większa od 5.
+
+Rozwiązanie:
+
+public class Zad1 {
+
+   public static void main(String[] args) {
+       Scanner scanner = new Scanner(System.in);
+       int number = scanner.nextInt();
+
+       if (number > 5) {
+           System.out.println("Liczba większa od 5");
+       } else {
+           System.out.println("Liczba nie jest większa od 5");
+       }
+   }
+}
+
+Zadanie 2
+Napisz program, który sprawdza czy dana wprowadzona liczba jest podzielna przez 3.
+
+Rozwiązanie:
+
+public class Zad2 {
+
+   public static void main(String[] args) {
+       System.out.println("Podaj liczbę");
+       Scanner scanner = new Scanner(System.in);
+       int number = scanner.nextInt();
+
+       if ( number%3 == 0  ){
+           System.out.println("Liczba podzielna przez 3");
+       }
+       else{
+           System.out.println("Liczba niepodzielna przez 3");
+       }
+   }
+}
+
+
+Zadanie 3
+Napisz program, który odczytuje wyraz i sprawdza czy wprowadzony wyraz to Akademia.
+
+Rozwiązanie:
+
+public class Zad3 {
+
+   public static void main(String[] args) {
+       String password = "Akademia";
+
+       System.out.println("Podaj wyraz");
+       Scanner scanner = new Scanner(System.in);
+       String word = scanner.next();
+
+       if ( word.equals(password)){
+           System.out.println("Podałeś poprawne hasło");
+       }
+       else{
+           System.out.println("Podałeś niepoprawne hasło");
+       }
+
+      // 2 sposób użycie skróconej instrukcji warunkowej
+       System.out.println(word.equals(password) ? "Podałeś poprawne hasło"
+       : "Podałeś niepoprawne hasło");
+   }
+}
+
+
+Zadanie 4
+Napisz program, który odczytuje wyraz i sprawdza czy wprowadzone imię jest męskie czy żeńskie.
+
+Rozwiązanie:
+
+public class Zad4 {
+
+   public static void main(String[] args) {
+       Scanner scanner = new Scanner(System.in);
+       System.out.println("Podaj imię");
+
+       String name = scanner.next();
+
+       if ( name.endsWith("a") &&
+               !name.equals("Kosma") && !name.equals("Kuba")){
+           System.out.println("Imię żeńskie");
+       }
+       else{
+           System.out.println("Imię męskie");
+       }
+
+       int length = name.length();
+       char lastLetter = name.charAt(length-1);
+
+       if ( lastLetter == 'a'){
+           System.out.println("Imie żeńskie");
+       }
+       else{
+           System.out.println("Imie męskie");
+       }
+   }
+}
+
+
+Zadanie 5
+Popraw dany kod, aby wypisywał liczbę największą, a nie najmniejszą.
+
+import java.lang.*;
+
+class Rextester
+{
+    public static void main(String args[])
+    {
+        Scanner scanner = new Scanner(System.in);
+        int a = scanner.nextInt();
+        int b = scanner.nextInt();
+        int min = a<b ? a : b;
+        System.out.println(min);
+    }
+}
+
+Rozwiązanie:
+
+import java.util.Scanner;
+
+
+public class Rextester {
+
+   public static void main(String[] args) {
+       Scanner scanner = new Scanner(System.in);
+       int a = scanner.nextInt();
+       int b = scanner.nextInt();
+       int max = a<b ? b : a;
+       System.out.println(max);
+   }
+}
+
+
+Zadanie 6
+Napisz kod, który odczytuje 3 liczby i wypisuje na ekran najmniejszą z nich.
+
+Rozwiązanie:
+
+import java.util.Scanner;
+
+public class Zad6 {
+
+   public static void main(String[] args) {
+       Scanner scanner = new Scanner(System.in);
+
+       // 5 1 10
+       int a = scanner.nextInt();
+       int b = scanner.nextInt();
+       int c = scanner.nextInt();
+       int min = a<b ? a : b;
+       // min = 1
+
+       if ( c < min ){
+           System.out.println(c);
+       }
+       else{
+           System.out.println(min);
+       }
+   }
+}
+
+
+Zadanie 7 ​
+Odczytaj wyraz i sprawdź czy ostatnia litera to M bądź m.
+
+Rozwiązanie:
+
+import java.util.Scanner;
+
+public class Zad7 {
+
+   public static void main(String[] args) {
+       Scanner scanner = new Scanner(System.in);
+       System.out.println("Podaj wyraz");
+       String word = scanner.next();
+       int length  = word.length();
+       char lastLetter = word.charAt(length-1);
+       if ( lastLetter =='M' || lastLetter == 'm' ){
+           System.out.println("TAK");
+       }
+       else{
+           System.out.println("NIE");
+       }
+       if ( word.endsWith("M") || word.endsWith("m") ){
+           System.out.println("TAK");
+       }
+       else{
+           System.out.println("NIE");
+       }
+   }
+}
+
+
+Zadanie 8
+Odczytaj wprowadzony wyraz przez użytkownika i sprawdź czy pierwsza litera wyrazu jest taka sama jak ostatnia. Wpisz odpowiedni komunikat.
+
+Rozwiązanie:
+
+import java.util.Scanner;
+
+public class Zad8 {
+
+   public static void main(String[] args) {
+       Scanner scanner = new Scanner(System.in);
+       System.out.println("Podaj wyraz");
+       String word = scanner.next();
+       int length  = word.length();
+       char firstLetter = word.charAt(0);
+       char lastLetter = word.charAt(length-1);
+       if ( firstLetter ==lastLetter){
+           System.out.println("Pierwsza i ostatnia litera są takie same");
+       }
+       else{
+           System.out.println("Pierwsza i ostatnia litera są różne");
+       }
+   }
+}
+
+Zadanie 9
+Odczytaj 2 wyrazy i sprawdź czy wprowadzone wyrazy są równe.
+Dla wywołania:
+Ala Ala
+Wynikiem powinno być tak.
+Dla wywołania:
+Ala Sak
+Wynikiem powinno być nie.
+
+Rozwiązanie:
+
+import java.util.Scanner;
+
+public class Zad9 {
+
+   public static void main(String[] args) {
+       Scanner scanner = new Scanner(System.in);
+       System.out.println("Podaj wyraz 1");
+       String word = scanner.next();
+       System.out.println("Podaj wyraz 2");
+       String secondWord = scanner.next();
+       if ( word.equals(secondWord)){
+           System.out.println("Wyrazy są równe");
+       }
+       else{
+           System.out.println("Wyrazy nie są równe");
+       }
+
+       System.out.println(word.equals(secondWord) ? "Wyrazy są równe"
+           : "Wyrazy nie są równe"
+       );
+
+   }
+}
+
+Zadanie 10
+Napisz program, który odczytuje słowo i sprawdza czy dany String jest poprawnym adresem url. Zakładamy, że adres url jest postaci http://www.wp.pl bądź postaci https://www.wp.pl bądź postaci www.wp.pl
+
+Rozwiązanie:
+
+import java.util.Scanner;
+
+public class Zad10 {
+
+   public static void main(String[] args) {
+       Scanner scanner = new Scanner(System.in);
+       System.out.println("Podaj adres url");
+       String url = scanner.next();
+
+       if ( url.startsWith("http://")
+               || url.startsWith("https://")
+               || url.startsWith("www.")){
+           System.out.println("Adres url jest poprawny");
+       }
+       else{
+           System.out.println("Adres url jest niepoprawny");
+       }
+   }
+}
+
+Zadanie 11
+Odczytaj dane słowo sprawdź czy słowo zawiera wyraz kajak.
+
+Rozwiązanie:
+
+import java.util.Scanner;
+
+public class Zad11 {
+
+   public static void main(String[] args) {
+       Scanner scanner = new Scanner(System.in);
+       System.out.println("Podaj wyraz");
+       String word = scanner.next();
+       String secretWord = "kajak";
+       boolean containsWord = word.contains(secretWord);
+
+       if ( containsWord ){
+           System.out.println("Wyraz zawiera słowo "+secretWord);
+       }
+       else{
+           System.out.println("Wyraz nie zawiera słowa "+secretWord);
+       }
+   }
+}
+
+Zadanie 12
+​Napisz program, który sprawdza czy wprowadzony wyraz jest kodem pocztowym. Kod pocztowy musi być w formacie 87-630.
+
+Rozwiązanie:
+
+import java.util.Scanner;
+
+public class Zad12 {
+
+   public static void main(String[] args) {
+       Scanner scanner = new Scanner(System.in);
+       String code = scanner.next();
+       if (code.length() == 6 && Character.isDigit(code.charAt(0)) &&
+               Character.isDigit(code.charAt(1))
+               && Character.isDigit(code.charAt(3)) &&
+               Character.isDigit(code.charAt(4))
+               && Character.isDigit(code.charAt(5))
+               && code.charAt(2) == '-') {
+           System.out.println("Kod jest poprawny");
+       } else {
+           System.out.println("Kod jest niepoprawny");
+       }
+   }
+}
+
+
+Zadanie 13
+Sprawdź czy liczba wprowadzona jest podzielna przez 3 lub 5.
+
+Rozwiązanie:
+
+import java.util.Scanner;
+
+public class Zad13 {
+
+   public static void main(String[] args) {
+       Scanner scanner = new Scanner(System.in);
+       System.out.println("Podaj liczbę");
+       int n = scanner.nextInt();
+       if (n % 3 == 0 || n % 5 == 0) {
+           System.out.println("TAK");
+       } else {
+           System.out.println("NIE");
+       }
+   }
+}
+
+Zadanie 14
+Odczytaj wiek osoby i sprawdź czy osoba jest pełnoletnia czy niepełnoletnia.
+
+Rozwiązanie:
+
+import java.util.Scanner;
+
+public class Zad14 {
+
+   public static void main(String[] args) {
+       Scanner scanner = new Scanner(System.in);
+       System.out.println("Podaj wiek");
+       int age = scanner.nextInt();
+       if ( age>=18){
+           System.out.println("Jesteś pełnoletni");
+       }
+       else{
+           System.out.println("Nie jesteś pełnoletni");
+       }
+   }
+}
+
+
+Zadanie 15
+Odczytaj 3 liczby i sprawdź czy jest możliwe otrzymanie z dwóch liczb trzeciej (jako suma).
+
+Rozwiązanie:
+
+
+import java.util.Scanner;
+
+public class Zad15 {
+
+   public static void main(String[] args) {
+       Scanner scanner = new Scanner(System.in);
+       System.out.println("Podaj a:");
+       int a = scanner.nextInt();
+       System.out.println("Podaj b:");
+       int b = scanner.nextInt();
+       System.out.println("Podaj c:");
+       int c = scanner.nextInt();
+
+       if (a + a + b + b == c || b + b + c + c == a || c + c + a + a == b ) {
+           System.out.println("TAK");
+       } else {
+           System.out.println("NIE");
+       }
+
+   }
+}
+
+Zadanie 16
+Mówimy, że osoba jest w wieku nastolatka jeśli ma pomiędzy 13 a 18 lat.
+Odczytaj 2 liczby oznaczające wiek dwóch osób, wypisz komunikat TAK jeśli 2 osoby są w wieku nastolatka oraz nie jeśli nie są w odpowiednim wieku.
+
+Rozwiązanie:
+
+
+import java.util.Scanner;
+
+public class Zad16 {
+
+   public static void main(String[] args) {
+       Scanner scanner = new Scanner(System.in);
+       System.out.println("Podaj wiek 1 osoby");
+       int a = scanner.nextInt();
+       System.out.println("Podaj wiek 2 osoby");
+       int b = scanner.nextInt();
+       if ( a>=13 && a<=18 && b>=13 && b<=18 ){
+           System.out.println("TAK");
+       }
+       else{
+           System.out.println("NIE");
+       }
+   }
+}
+
+
