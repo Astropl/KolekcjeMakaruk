@@ -15,9 +15,10 @@ public class Zad1 {
 //
 //        Zad3 zad3 = new Zad3();
 //        zad3.init();
-        Zad4 zad4 = new Zad4();
-        zad4.init();
-
+//        Zad4 zad4 = new Zad4();
+//        zad4.init();
+        Zad5 zad5 = new Zad5();
+        zad5.init();
 
 
     }
